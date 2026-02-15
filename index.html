@@ -253,6 +253,57 @@ tbody tr:hover {
 .status-recruiting { color: #2ecc71; font-weight: 600; }
 .status-terminated { color: #95a5a6; font-weight: 600; }
 .status-withdrawn { color: #7f8c8d; font-weight: 600; }
+
+/* Welcome modal */
+#welcomeModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+#welcomeModal.active {
+  display: flex;
+}
+.modal-content {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  max-width: 600px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+}
+.modal-content h2 {
+  margin-bottom: 20px;
+  color: #2c3e50;
+  font-size: 24px;
+}
+.modal-content p {
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 30px;
+  font-size: 15px;
+}
+.modal-content button {
+  width: 100%;
+  padding: 14px;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.modal-content button:hover {
+  background: #2980b9;
+}
 </style>
 </head>
 <body class="login-mode">
@@ -264,6 +315,14 @@ tbody tr:hover {
   <input type="password" id="password" placeholder="Password" autocomplete="current-password">
   <button onclick="checkLogin()">Access Dashboard</button>
   <div id="error">Invalid username or password</div>
+</div>
+
+<div id="welcomeModal">
+  <div class="modal-content">
+    <h2>💊🦞 Welcome to Artiva Clinical Sites</h2>
+    <p>This platform was entirely built using agentic AI by Daniel Branco. All commands were given to the AI agent via text. This is not an official Artiva platform. All data on this platform is publicly available. Please feel free to ask changes, additions or anything you like in the chat box.</p>
+    <button onclick="closeWelcomeModal()">OK, Let's Go!</button>
+  </div>
 </div>
 
 <div id="dashboard">
@@ -332,11 +391,21 @@ function checkLogin() {
   
   if (user === VALID_USER && pass === VALID_PASS) {
     sessionStorage.setItem('artiva_auth', 'true');
-    showDashboard();
+    showWelcomeModal();
   } else {
     document.getElementById('error').style.display = 'block';
     document.getElementById('password').value = '';
   }
+}
+
+function showWelcomeModal() {
+  document.getElementById('loginBox').style.display = 'none';
+  document.getElementById('welcomeModal').classList.add('active');
+}
+
+function closeWelcomeModal() {
+  document.getElementById('welcomeModal').classList.remove('active');
+  showDashboard();
 }
 
 function showDashboard() {
