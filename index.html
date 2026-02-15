@@ -355,6 +355,46 @@ tbody tr:hover {
 .modal-content button:hover {
   background: #2980b9;
 }
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  #header {
+    top: 70px;
+    padding: 8px 12px;
+    font-size: 12px;
+    gap: 8px;
+  }
+  #programSelector, #diseaseFilter {
+    font-size: 11px;
+    padding: 5px 8px;
+    max-width: 150px;
+  }
+  .filter-label {
+    font-size: 10px;
+  }
+  #headerStats {
+    font-size: 11px;
+    width: 100%;
+    justify-content: center;
+  }
+  #logout, #viewToggle {
+    padding: 6px 12px;
+    font-size: 11px;
+  }
+  #viewToggle {
+    right: 75px;
+  }
+  #legend {
+    font-size: 9px;
+    padding: 10px;
+    bottom: 10px;
+    right: 10px;
+    max-width: 200px;
+  }
+  #legend h4 {
+    font-size: 11px;
+  }
+}
 </style>
 </head>
 <body class="login-mode">
@@ -478,27 +518,43 @@ function closeWelcomeModal() {
   showDashboard();
 }
 
+let dashboardInitialized = false;
+
 function showDashboard() {
   document.body.className = 'dashboard-mode';
-  loadDashboard();
-  populateTable();
   
-  // Bind program selector
-  document.getElementById('programSelector').addEventListener('change', function(e) {
-    switchProgram(e.target.value);
-  });
-  
-  // Bind disease filter
-  document.getElementById('diseaseFilter').addEventListener('change', function(e) {
-    filterByDisease(e.target.value);
-  });
-  
-  // Initialize disease filter and stats
-  populateDiseaseFilter();
-  updateStats();
-  
-  // Bind toggle view button
-  document.getElementById('viewToggle').addEventListener('click', toggleView);
+  if (!dashboardInitialized) {
+    loadDashboard();
+    populateTable();
+    
+    // Bind program selector
+    const programSelector = document.getElementById('programSelector');
+    if (programSelector) {
+      programSelector.addEventListener('change', function(e) {
+        switchProgram(e.target.value);
+      });
+    }
+    
+    // Bind disease filter
+    const diseaseFilter = document.getElementById('diseaseFilter');
+    if (diseaseFilter) {
+      diseaseFilter.addEventListener('change', function(e) {
+        filterByDisease(e.target.value);
+      });
+    }
+    
+    // Bind toggle view button
+    const viewToggleBtn = document.getElementById('viewToggle');
+    if (viewToggleBtn) {
+      viewToggleBtn.addEventListener('click', toggleView);
+    }
+    
+    // Initialize disease filter and stats
+    populateDiseaseFilter();
+    updateStats();
+    
+    dashboardInitialized = true;
+  }
 }
 
 function logout() {
@@ -526,12 +582,15 @@ let sites = allSites;
 
 // Update sites based on selected program
 function switchProgram(program) {
+  console.log('Switching to program:', program);
   currentProgram = program;
   currentDisease = ''; // Reset disease filter
   allSites = datasets[program];
   sites = allSites;
+  console.log('Total sites for', program + ':', sites.length);
   populateDiseaseFilter();
-  document.getElementById('diseaseFilter').value = '';
+  const diseaseFilter = document.getElementById('diseaseFilter');
+  if (diseaseFilter) diseaseFilter.value = '';
   updateStats();
   refreshMap();
   refreshTable();
@@ -576,6 +635,7 @@ function filterByDisease(disease) {
     });
   }
   
+  console.log('Filtered to', sites.length, 'sites for disease:', disease || 'All');
   updateStats();
   refreshMap();
   refreshTable();
@@ -593,9 +653,13 @@ function updateStats() {
 // Refresh the map with current sites
 function refreshMap() {
   const svg = document.getElementById('svg');
+  if (!svg) return;
+  
   // Remove existing site circles
   const circles = svg.querySelectorAll('.site');
   circles.forEach(c => c.remove());
+  
+  // Redraw sites with updated filter
   drawSites();
 }
 
