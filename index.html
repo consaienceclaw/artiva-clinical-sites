@@ -200,7 +200,7 @@ document.getElementById('password')?.addEventListener('keypress', function(e) {
 });
 
 function checkLogin() {
-  const user = document.getElementById('username').value.trim();
+  const user = document.getElementById('username').value.trim().toLowerCase();
   const pass = document.getElementById('password').value;
   
   if (user === VALID_USER && pass === VALID_PASS) {
