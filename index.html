@@ -268,7 +268,7 @@ tbody tr:hover {
 
 <div id="dashboard">
   <button id="logout" onclick="logout()">Logout</button>
-  <button id="viewToggle" onclick="toggleView()">📊 Table View</button>
+  <button id="viewToggle">📊 Table View</button>
   <div id="header">
     <b>Artiva Biotherapeutics</b> — Clinical Trial Sites &nbsp;|&nbsp;
     <b>7</b> Studies &nbsp;|&nbsp; <b>77</b> Sites &nbsp;|&nbsp; <b>9</b> Countries
@@ -343,6 +343,9 @@ function showDashboard() {
   document.body.className = 'dashboard-mode';
   loadDashboard();
   populateTable();
+  
+  // Bind toggle view button
+  document.getElementById('viewToggle').addEventListener('click', toggleView);
 }
 
 function logout() {
@@ -414,10 +417,16 @@ function drawSites() {
 let currentView = 'map';
 
 function toggleView() {
+  console.log('Toggle view clicked, current:', currentView);
   const mapDiv = document.getElementById('map');
   const tableDiv = document.getElementById('tableView');
   const legendDiv = document.getElementById('legend');
   const toggleBtn = document.getElementById('viewToggle');
+  
+  if (!mapDiv || !tableDiv || !legendDiv || !toggleBtn) {
+    console.error('Missing elements:', { mapDiv, tableDiv, legendDiv, toggleBtn });
+    return;
+  }
   
   if (currentView === 'map') {
     mapDiv.classList.add('hidden');
@@ -432,6 +441,7 @@ function toggleView() {
     toggleBtn.textContent = '📊 Table View';
     currentView = 'map';
   }
+  console.log('Toggle complete, new view:', currentView);
 }
 
 function populateTable() {
