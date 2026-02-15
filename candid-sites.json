@@ -10,7 +10,10 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#9b59b6",
-    "title": "Cizutamig gMG [P1]"
+    "title": "Cizutamig gMG [P1]",
+    "conditions": [
+      "Generalized Myasthenia Gravis"
+    ]
   },
   {
     "lat": -37.814,
@@ -23,7 +26,10 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#9b59b6",
-    "title": "Cizutamig Bioavailability [P1]"
+    "title": "Cizutamig Bioavailability [P1]",
+    "conditions": [
+      "Healthy Participants Study"
+    ]
   },
   {
     "lat": -37.814,
@@ -36,7 +42,12 @@
     "status": "NOT_YET_RECRUITING",
     "site_status": "NOT_YET_RECRUITING",
     "color": "#9b59b6",
-    "title": "Cizutamig IgE diseases [P1]"
+    "title": "Cizutamig IgE diseases [P1]",
+    "conditions": [
+      "IgE-Mediated Hypersensitivity",
+      "IgE Mediated Food Allergy",
+      "IgE-Mediated Cow Milk Allergy"
+    ]
   },
   {
     "lat": 39.9075,
@@ -48,7 +59,10 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#9b59b6",
-    "title": "Cizutamig SLE [P1]"
+    "title": "Cizutamig SLE [P1]",
+    "conditions": [
+      "Systemic Lupus Erythematosus (SLE)"
+    ]
   },
   {
     "lat": 41.69143,
@@ -60,7 +74,10 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#9b59b6",
-    "title": "CND261 RA [P1]"
+    "title": "CND261 RA [P1]",
+    "conditions": [
+      "Rheumatoid Arthritis"
+    ]
   },
   {
     "lat": 47.00902,
@@ -72,7 +89,10 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#9b59b6",
-    "title": "CND261 RA [P1]"
+    "title": "CND261 RA [P1]",
+    "conditions": [
+      "Rheumatoid Arthritis"
+    ]
   },
   {
     "lat": -36.84853,
@@ -84,7 +104,10 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#9b59b6",
-    "title": "CND261 RA [P1]"
+    "title": "CND261 RA [P1]",
+    "conditions": [
+      "Rheumatoid Arthritis"
+    ]
   },
   {
     "lat": 44.43225,
@@ -96,7 +119,10 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#9b59b6",
-    "title": "CND261 RA [P1]"
+    "title": "CND261 RA [P1]",
+    "conditions": [
+      "Rheumatoid Arthritis"
+    ]
   },
   {
     "lat": 46.76667,
@@ -108,7 +134,10 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#9b59b6",
-    "title": "CND261 RA [P1]"
+    "title": "CND261 RA [P1]",
+    "conditions": [
+      "Rheumatoid Arthritis"
+    ]
   },
   {
     "lat": 50.45466,
@@ -120,6 +149,9 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#9b59b6",
-    "title": "CND261 RA [P1]"
+    "title": "CND261 RA [P1]",
+    "conditions": [
+      "Rheumatoid Arthritis"
+    ]
   }
 ]

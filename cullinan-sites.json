@@ -10,7 +10,12 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 Sj\u00f6gren's [P1]"
+    "title": "CLN-978 Sj\u00f6gren's [P1]",
+    "conditions": [
+      "Sj\u00f6gren",
+      "Sjogren Disease",
+      "Sjogren's Syndrome"
+    ]
   },
   {
     "lat": 40.76078,
@@ -23,7 +28,12 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 Sj\u00f6gren's [P1]"
+    "title": "CLN-978 Sj\u00f6gren's [P1]",
+    "conditions": [
+      "Sj\u00f6gren",
+      "Sjogren Disease",
+      "Sjogren's Syndrome"
+    ]
   },
   {
     "lat": 49.59099,
@@ -35,7 +45,12 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 Sj\u00f6gren's [P1]"
+    "title": "CLN-978 Sj\u00f6gren's [P1]",
+    "conditions": [
+      "Sj\u00f6gren",
+      "Sjogren Disease",
+      "Sjogren's Syndrome"
+    ]
   },
   {
     "lat": 33.4356,
@@ -48,7 +63,11 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 SLE [P1]"
+    "title": "CLN-978 SLE [P1]",
+    "conditions": [
+      "SLE",
+      "SLE (Systemic Lupus)"
+    ]
   },
   {
     "lat": 32.22174,
@@ -61,7 +80,11 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 SLE [P1]"
+    "title": "CLN-978 SLE [P1]",
+    "conditions": [
+      "SLE",
+      "SLE (Systemic Lupus)"
+    ]
   },
   {
     "lat": 28.53834,
@@ -74,7 +97,11 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 SLE [P1]"
+    "title": "CLN-978 SLE [P1]",
+    "conditions": [
+      "SLE",
+      "SLE (Systemic Lupus)"
+    ]
   },
   {
     "lat": 41.66113,
@@ -87,7 +114,11 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 SLE [P1]"
+    "title": "CLN-978 SLE [P1]",
+    "conditions": [
+      "SLE",
+      "SLE (Systemic Lupus)"
+    ]
   },
   {
     "lat": 40.71427,
@@ -100,7 +131,11 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 SLE [P1]"
+    "title": "CLN-978 SLE [P1]",
+    "conditions": [
+      "SLE",
+      "SLE (Systemic Lupus)"
+    ]
   },
   {
     "lat": 43.15478,
@@ -113,7 +148,11 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 SLE [P1]"
+    "title": "CLN-978 SLE [P1]",
+    "conditions": [
+      "SLE",
+      "SLE (Systemic Lupus)"
+    ]
   },
   {
     "lat": 35.14953,
@@ -126,7 +165,11 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 SLE [P1]"
+    "title": "CLN-978 SLE [P1]",
+    "conditions": [
+      "SLE",
+      "SLE (Systemic Lupus)"
+    ]
   },
   {
     "lat": 33.01984,
@@ -139,7 +182,11 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 SLE [P1]"
+    "title": "CLN-978 SLE [P1]",
+    "conditions": [
+      "SLE",
+      "SLE (Systemic Lupus)"
+    ]
   },
   {
     "lat": 29.53773,
@@ -152,7 +199,11 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 SLE [P1]"
+    "title": "CLN-978 SLE [P1]",
+    "conditions": [
+      "SLE",
+      "SLE (Systemic Lupus)"
+    ]
   },
   {
     "lat": 40.76078,
@@ -165,7 +216,11 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 SLE [P1]"
+    "title": "CLN-978 SLE [P1]",
+    "conditions": [
+      "SLE",
+      "SLE (Systemic Lupus)"
+    ]
   },
   {
     "lat": -37.78333,
@@ -178,7 +233,11 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 SLE [P1]"
+    "title": "CLN-978 SLE [P1]",
+    "conditions": [
+      "SLE",
+      "SLE (Systemic Lupus)"
+    ]
   },
   {
     "lat": -31.97619,
@@ -190,7 +249,11 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 SLE [P1]"
+    "title": "CLN-978 SLE [P1]",
+    "conditions": [
+      "SLE",
+      "SLE (Systemic Lupus)"
+    ]
   },
   {
     "lat": 41.69143,
@@ -202,7 +265,11 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 SLE [P1]"
+    "title": "CLN-978 SLE [P1]",
+    "conditions": [
+      "SLE",
+      "SLE (Systemic Lupus)"
+    ]
   },
   {
     "lat": 47.00902,
@@ -214,7 +281,11 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 SLE [P1]"
+    "title": "CLN-978 SLE [P1]",
+    "conditions": [
+      "SLE",
+      "SLE (Systemic Lupus)"
+    ]
   },
   {
     "lat": 33.52066,
@@ -227,7 +298,11 @@
     "status": "ACTIVE_NOT_RECRUITING",
     "site_status": "ACTIVE_NOT_RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 B-NHL [P1]"
+    "title": "CLN-978 B-NHL [P1]",
+    "conditions": [
+      "NHL",
+      "NHL, Relapsed, Adult"
+    ]
   },
   {
     "lat": 34.13945,
@@ -240,7 +315,11 @@
     "status": "ACTIVE_NOT_RECRUITING",
     "site_status": "ACTIVE_NOT_RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 B-NHL [P1]"
+    "title": "CLN-978 B-NHL [P1]",
+    "conditions": [
+      "NHL",
+      "NHL, Relapsed, Adult"
+    ]
   },
   {
     "lat": 33.749,
@@ -253,7 +332,11 @@
     "status": "ACTIVE_NOT_RECRUITING",
     "site_status": "ACTIVE_NOT_RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 B-NHL [P1]"
+    "title": "CLN-978 B-NHL [P1]",
+    "conditions": [
+      "NHL",
+      "NHL, Relapsed, Adult"
+    ]
   },
   {
     "lat": 42.35843,
@@ -266,7 +349,11 @@
     "status": "ACTIVE_NOT_RECRUITING",
     "site_status": "ACTIVE_NOT_RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 B-NHL [P1]"
+    "title": "CLN-978 B-NHL [P1]",
+    "conditions": [
+      "NHL",
+      "NHL, Relapsed, Adult"
+    ]
   },
   {
     "lat": 40.88593,
@@ -279,7 +366,11 @@
     "status": "ACTIVE_NOT_RECRUITING",
     "site_status": "ACTIVE_NOT_RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 B-NHL [P1]"
+    "title": "CLN-978 B-NHL [P1]",
+    "conditions": [
+      "NHL",
+      "NHL, Relapsed, Adult"
+    ]
   },
   {
     "lat": 32.78306,
@@ -292,7 +383,11 @@
     "status": "ACTIVE_NOT_RECRUITING",
     "site_status": "ACTIVE_NOT_RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 B-NHL [P1]"
+    "title": "CLN-978 B-NHL [P1]",
+    "conditions": [
+      "NHL",
+      "NHL, Relapsed, Adult"
+    ]
   },
   {
     "lat": 49.59099,
@@ -304,7 +399,10 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 RA [P1]"
+    "title": "CLN-978 RA [P1]",
+    "conditions": [
+      "Rheumatoid Arthritis (RA"
+    ]
   },
   {
     "lat": 41.89193,
@@ -316,6 +414,9 @@
     "status": "RECRUITING",
     "site_status": "RECRUITING",
     "color": "#e74c3c",
-    "title": "CLN-978 RA [P1]"
+    "title": "CLN-978 RA [P1]",
+    "conditions": [
+      "Rheumatoid Arthritis (RA"
+    ]
   }
 ]
