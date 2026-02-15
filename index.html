@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Artiva Clinical Sites - Login</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { 
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif; 
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+#loginBox {
+  background: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+  width: 90%;
+  max-width: 400px;
+}
+#loginBox h2 {
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 24px;
+}
+#loginBox p {
+  color: #666;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+#loginBox input {
+  width: 100%;
+  padding: 12px 16px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+#loginBox input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+#loginBox button {
+  width: 100%;
+  padding: 12px;
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+#loginBox button:hover {
+  background: #5568d3;
+}
+#error {
+  color: #e74c3c;
+  font-size: 13px;
+  margin-top: 10px;
+  display: none;
+}
+#content {
+  display: none;
+}
+</style>
+</head>
+<body>
+
+<div id="loginBox">
+  <h2>💊🦞 Artiva Clinical Sites</h2>
+  <p>Please enter credentials to view the dashboard</p>
+  <input type="text" id="username" placeholder="Username" autocomplete="username">
+  <input type="password" id="password" placeholder="Password" autocomplete="current-password">
+  <button onclick="checkLogin()">Access Dashboard</button>
+  <div id="error">Invalid credentials. Please try again.</div>
+</div>
+
+<div id="content"></div>
+
+<script>
+const VALID_USER = 'artiva';
+const VALID_PASS = '2024coolestipo!';
+
+// Check if already logged in
+if (sessionStorage.getItem('artiva_auth') === 'true') {
+  showDashboard();
+}
+
+document.getElementById('password').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') checkLogin();
+});
+
+function checkLogin() {
+  const user = document.getElementById('username').value;
+  const pass = document.getElementById('password').value;
+  
+  if (user === VALID_USER && pass === VALID_PASS) {
+    sessionStorage.setItem('artiva_auth', 'true');
+    showDashboard();
+  } else {
+    document.getElementById('error').style.display = 'block';
+    document.getElementById('password').value = '';
+  }
+}
+
+function showDashboard() {
+  document.getElementById('loginBox').style.display = 'none';
+  document.getElementById('content').style.display = 'block';
+  loadDashboard();
+}
+
+function loadDashboard() {
+  // Inject the full dashboard HTML
+  document.getElementById('content').innerHTML = `
+<!DOCTYPE html>
+<html>
+<head>
+<title>Artiva Biotherapeutics - Clinical Trial Sites</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #1a2332; }
+#header { position:fixed; top:10px; left:50%; transform:translateX(-50%); z-index:10;
+  background:rgba(26,35,50,0.95); color:white; padding:10px 20px; border-radius:8px;
+  font-size:14px; white-space:nowrap; }
+#header b { color:#3498db; }
+#logout { position:fixed; top:10px; right:10px; z-index:11;
+  background:rgba(231,76,60,0.9); color:white; padding:8px 16px; border-radius:6px;
+  font-size:12px; cursor:pointer; border:none; }
+#logout:hover { background:rgba(231,76,60,1); }
+#map { width:100vw; height:100vh; }
+svg { width:100%; height:100%; }
+.land { fill:#2c3e50; stroke:#34495e; stroke-width:0.5; }
+.site { cursor:pointer; opacity:0.85; }
+.site:hover { opacity:1; transform-origin:center; }
+#tooltip { position:fixed; background:rgba(0,0,0,0.9); color:white; padding:10px 14px;
+  border-radius:6px; font-size:12px; pointer-events:none; display:none; z-index:20;
+  max-width:300px; line-height:1.5; }
+#legend { position:fixed; bottom:20px; right:20px; background:rgba(255,255,255,0.95);
+  padding:14px 18px; border-radius:8px; font-size:11px; z-index:10; max-width:300px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.3); }
+#legend h4 { margin-bottom:6px; font-size:13px; }
+</style>
+</head>
+<body>
+<button id="logout" onclick="logout()">Logout</button>
+<div id="header">
+  <b>Artiva Biotherapeutics</b> &mdash; Clinical Trial Sites &nbsp;|&nbsp;
+  <b>7</b> Studies &nbsp;|&nbsp; <b>77</b> Sites &nbsp;|&nbsp;
+  <b>9</b> Countries
+</div>
+<div id="tooltip"></div>
+<div id="legend"><h4>Studies</h4><div style="margin:4px 0"><span style="background:#e74c3c;width:12px;height:12px;display:inline-block;border-radius:50%;margin-right:6px"></span>AB-101 + B-Cell Depleting mAb (Lupus) [P1]</div><div style="margin:4px 0"><span style="background:#9b59b6;width:12px;height:12px;display:inline-block;border-radius:50%;margin-right:6px"></span>AB-201 HER2 (Withdrawn) [P1/2]</div><div style="margin:4px 0"><span style="background:#3498db;width:12px;height:12px;display:inline-block;border-radius:50%;margin-right:6px"></span>AB-101 Mono/Combo NHL [P1/2]</div><div style="margin:4px 0"><span style="background:#2ecc71;width:12px;height:12px;display:inline-block;border-radius:50%;margin-right:6px"></span>AB-101 Safety Study [P1]</div><div style="margin:4px 0"><span style="background:#f39c12;width:12px;height:12px;display:inline-block;border-radius:50%;margin-right:6px"></span>AB-101 Korea Autoimmune [P1]</div><div style="margin:4px 0"><span style="background:#1abc9c;width:12px;height:12px;display:inline-block;border-radius:50%;margin-right:6px"></span>AFM13 + AB-101 (Terminated) [P2]</div><div style="margin:4px 0"><span style="background:#e67e22;width:12px;height:12px;display:inline-block;border-radius:50%;margin-right:6px"></span>AlloNK Autoimmune [P2]</div></div>
+<div id="map">
+<svg id="svg" viewBox="-180 -90 360 180">
+</svg>
+</div>
+<script>
+function logout() {
+  sessionStorage.removeItem('artiva_auth');
+  window.location.reload();
+}
+
+var sites = ${JSON.stringify([{"lat": 33.52066, "lon": -86.80249, "facility": "Artiva Investigational Site Birmingham", "city": "Birmingham", "state": "Alabama", "country": "United States", "nct": "NCT06265220", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#e74c3c", "title": "AB-101 + B-Cell Depleting mAb (Lupus) [P1]"}, {"lat": 32.22174, "lon": -110.92648, "facility": "Artiva Investigational Site Tucson", "city": "Tucson", "state": "Arizona", "country": "United States", "nct": "NCT06265220", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#e74c3c", "title": "AB-101 + B-Cell Depleting mAb (Lupus) [P1]"}, {"lat": 32.71571, "lon": -117.16472, "facility": "Artiva Investigational Site San Diego", "city": "San Diego", "state": "California", "country": "United States", "nct": "NCT06265220", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#e74c3c", "title": "AB-101 + B-Cell Depleting mAb (Lupus) [P1]"}, {"lat": 25.95648, "lon": -80.13921, "facility": "Artiva Investigational Site Aventura", "city": "Aventura", "state": "Florida", "country": "United States", "nct": "NCT06265220", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#e74c3c", "title": "AB-101 + B-Cell Depleting mAb (Lupus) [P1]"}, {"lat": 26.13421, "lon": -80.23184, "facility": "Artiva Investigational Site Plantation", "city": "Plantation", "state": "Florida", "country": "United States", "nct": "NCT06265220", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#e74c3c", "title": "AB-101 + B-Cell Depleting mAb (Lupus) [P1]"}, {"lat": 41.66113, "lon": -91.53017, "facility": "Artiva Investigational Site Iowa", "city": "Iowa City", "state": "Iowa", "country": "United States", "nct": "NCT06265220", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#e74c3c", "title": "AB-101 + B-Cell Depleting mAb (Lupus) [P1]"}, {"lat": 35.22709, "lon": -80.84313, "facility": "Artiva Investigational Site Charlotte", "city": "Charlotte", "state": "North Carolina", "country": "United States", "nct": "NCT06265220", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#e74c3c", "title": "AB-101 + B-Cell Depleting mAb (Lupus) [P1]"}, {"lat": 32.7668, "lon": -96.59916, "facility": "Artiva Investigational Site Mesquite", "city": "Mesquite", "state": "Texas", "country": "United States", "nct": "NCT06265220", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#e74c3c", "title": "AB-101 + B-Cell Depleting mAb (Lupus) [P1]"}, {"lat": 30.15799, "lon": -95.48938, "facility": "Artiva Investigational Site Woodlands", "city": "The Woodlands", "state": "Texas", "country": "United States", "nct": "NCT06265220", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#e74c3c", "title": "AB-101 + B-Cell Depleting mAb (Lupus) [P1]"}, {"lat": 45.52345, "lon": -122.67621, "facility": "Oregon Health Science University (OHSU)", "city": "Portland", "state": "Oregon", "country": "United States", "nct": "NCT05678205", "status": "WITHDRAWN", "site_status": "", "color": "#9b59b6", "title": "AB-201 HER2 (Withdrawn) [P1/2]"}, {"lat": 37.29111, "lon": 127.00889, "facility": "The Catholic University of Korea, St. Vincent's Hospital", "city": "Suwon", "state": "Gyeonggi-do", "country": "South Korea", "nct": "NCT05678205", "status": "WITHDRAWN", "site_status": "", "color": "#9b59b6", "title": "AB-201 HER2 (Withdrawn) [P1/2]"}, {"lat": 33.52066, "lon": -86.80249, "facility": "Artiva Clinical Trial Site", "city": "Birmingham", "state": "Alabama", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 32.22174, "lon": -110.92648, "facility": "Artiva Clinical Trial Site", "city": "Tucson", "state": "Arizona", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 33.78779, "lon": -117.85311, "facility": "Artiva Clinical Trial Site", "city": "Orange", "state": "California", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 32.71571, "lon": -117.16472, "facility": "Artiva Clinical Trial Site", "city": "San Diego", "state": "California", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 29.65163, "lon": -82.32483, "facility": "Artiva Clinical Trial Site", "city": "Gainesville", "state": "Florida", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 33.749, "lon": -84.38798, "facility": "Artiva Clinical Trial Site", "city": "Atlanta", "state": "Georgia", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 41.85003, "lon": -87.65005, "facility": "Artiva Clinical Trial Site", "city": "Chicago", "state": "Illinois", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 41.66113, "lon": -91.53017, "facility": "Artiva Clinical Trial Site", "city": "Iowa City", "state": "Iowa", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 37.69224, "lon": -97.33754, "facility": "Artiva Clinical Trial Site", "city": "Wichita", "state": "Kansas", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 38.25424, "lon": -85.75941, "facility": "Artiva Clinical Trial Site", "city": "Louisville", "state": "Kentucky", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 42.33143, "lon": -83.04575, "facility": "Artiva Clinical Trial Site", "city": "Detroit", "state": "Michigan", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 40.77066, "lon": -73.71763, "facility": "Artiva Clinical Trial Site", "city": "Lake Success", "state": "New York", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 40.71427, "lon": -74.00597, "facility": "Artiva Clinical Trial Site", "city": "New York", "state": "New York", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 39.96118, "lon": -82.99879, "facility": "Artiva Clinical Trial Site", "city": "Columbus", "state": "Ohio", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 45.52345, "lon": -122.67621, "facility": "Artiva Clinical Trial Site", "city": "Portland", "state": "Oregon", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 39.95238, "lon": -75.16362, "facility": "Artiva Clinical Trial Site", "city": "Philadelphia", "state": "Pennsylvania", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 39.95238, "lon": -75.16362, "facility": "Artiva Clinical Trial Site", "city": "Philadelphia", "state": "Pennsylvania", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 41.82399, "lon": -71.41283, "facility": "Artiva Clinical Trial Site", "city": "Providence", "state": "Rhode Island", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 32.78306, "lon": -96.80667, "facility": "Artiva Clinical Trial Site", "city": "Dallas", "state": "Texas", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 40.76078, "lon": -111.89105, "facility": "Artiva Clinical Trial Site", "city": "Salt Lake City", "state": "Utah", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 37.55376, "lon": -77.46026, "facility": "Artiva Clinical Trial Site", "city": "Richmond", "state": "Virginia", "country": "United States", "nct": "NCT04673617", "status": "ACTIVE_NOT_RECRUITING", "site_status": "", "color": "#3498db", "title": "AB-101 Mono/Combo NHL [P1/2]"}, {"lat": 26.13421, "lon": -80.23184, "facility": "IRIS Research and Development, LLC", "city": "Plantation", "state": "Florida", "country": "United States", "nct": "NCT06581562", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#2ecc71", "title": "AB-101 Safety Study [P1]"}, {"lat": 37.566, "lon": 126.9784, "facility": "Seoul National University Hosptial", "city": "Seoul", "state": "", "country": "South Korea", "nct": "NCT06699771", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#f39c12", "title": "AB-101 Korea Autoimmune [P1]"}, {"lat": 37.566, "lon": 126.9784, "facility": "Asan Medical Center", "city": "Seoul", "state": "", "country": "South Korea", "nct": "NCT06699771", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#f39c12", "title": "AB-101 Korea Autoimmune [P1]"}, {"lat": 37.566, "lon": 126.9784, "facility": "Samsung Medical Center", "city": "Seoul", "state": "", "country": "South Korea", "nct": "NCT06699771", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#f39c12", "title": "AB-101 Korea Autoimmune [P1]"}, {"lat": 33.52066, "lon": -86.80249, "facility": "O'Neal Comprehensive Cancer Center at UAB", "city": "Birmingham", "state": "Alabama", "country": "United States", "nct": "NCT05883449", "status": "TERMINATED", "site_status": "", "color": "#1abc9c", "title": "AFM13 + AB-101 (Terminated) [P2]"}, {"lat": 34.13945, "lon": -117.97729, "facility": "City of Hope National Medical Center", "city": "Duarte", "state": "California", "country": "United States", "nct": "NCT05883449", "status": "TERMINATED", "site_status": "", "color": "#1abc9c", "title": "AFM13 + AB-101 (Terminated) [P2]"}, {"lat": 33.78779, "lon": -117.85311, "facility": "UC Irvine Health", "city": "Orange", "state": "California", "country": "United States", "nct": "NCT05883449", "status": "TERMINATED", "site_status": "", "color": "#1abc9c", "title": "AFM13 + AB-101 (Terminated) [P2]"}, {"lat": 39.73915, "lon": -104.9847, "facility": "Sarah Cannon Research Institute", "city": "Denver", "state": "Colorado", "country": "United States", "nct": "NCT05883449", "status": "TERMINATED", "site_status": "", "color": "#1abc9c", "title": "AFM13 + AB-101 (Terminated) [P2]"}, {"lat": 38.25424, "lon": -85.75941, "facility": "Norton Cancer Institute", "city": "Louisville", "state": "Kentucky", "country": "United States", "nct": "NCT05883449", "status": "TERMINATED", "site_status": "", "color": "#1abc9c", "title": "AFM13 + AB-101 (Terminated) [P2]"}, {"lat": 42.35843, "lon": -71.05977, "facility": "Beth Israel Deaconess Medical", "city": "Boston", "state": "Massachusetts", "country": "United States", "nct": "NCT05883449", "status": "TERMINATED", "site_status": "", "color": "#1abc9c", "title": "AFM13 + AB-101 (Terminated) [P2]"}, {"lat": 42.33143, "lon": -83.04575, "facility": "Karmanos Cancer Institute", "city": "Detroit", "state": "Michigan", "country": "United States", "nct": "NCT05883449", "status": "TERMINATED", "site_status": "", "color": "#1abc9c", "title": "AFM13 + AB-101 (Terminated) [P2]"}, {"lat": 44.97997, "lon": -93.26384, "facility": "Masonic Cancer Center, University of Minnesota", "city": "Minneapolis", "state": "Minnesota", "country": "United States", "nct": "NCT05883449", "status": "TERMINATED", "site_status": "", "color": "#1abc9c", "title": "AFM13 + AB-101 (Terminated) [P2]"}, {"lat": 38.62727, "lon": -90.19789, "facility": "Washington University School of Medicine", "city": "St Louis", "state": "Missouri", "country": "United States", "nct": "NCT05883449", "status": "TERMINATED", "site_status": "", "color": "#1abc9c", "title": "AFM13 + AB-101 (Terminated) [P2]"}, {"lat": 40.88593, "lon": -74.04347, "facility": "John Theurer Cancer Center", "city": "Hackensack", "state": "New Jersey", "country": "United States", "nct": "NCT05883449", "status": "TERMINATED", "site_status": "", "color": "#1abc9c", "title": "AFM13 + AB-101 (Terminated) [P2]"}, {"lat": 40.71427, "lon": -74.00597, "facility": "Memorial Sloan Kettering Cancer Center", "city": "New York", "state": "New York", "country": "United States", "nct": "NCT05883449", "status": "TERMINATED", "site_status": "", "color": "#1abc9c", "title": "AFM13 + AB-101 (Terminated) [P2]"}, {"lat": 35.9132, "lon": -79.05584, "facility": "UNC Immunotherapy Team, University of North Carolina at Chapel Hill", "city": "Chapel Hill", "state": "North Carolina", "country": "United States", "nct": "NCT05883449", "status": "TERMINATED", "site_status": "", "color": "#1abc9c", "title": "AFM13 + AB-101 (Terminated) [P2]"}, {"lat": 41.4995, "lon": -81.69541, "facility": "Cleveland Clinic", "city": "Cleveland", "state": "Ohio", "country": "United States", "nct": "NCT05883449", "status": "TERMINATED", "site_status": "", "color": "#1abc9c", "title": "AFM13 + AB-101 (Terminated) [P2]"}, {"lat": 39.95238, "lon": -75.16362, "facility": "University of Pennsylvania, Abramson Cancer Center", "city": "Philadelphia", "state": "Pennsylvania", "country": "United States", "nct": "NCT05883449", "status": "TERMINATED", "site_status": "", "color": "#1abc9c", "title": "AFM13 + AB-101 (Terminated) [P2]"}, {"lat": 39.95238, "lon": -75.16362, "facility": "Fox Chase Cancer Center", "city": "Philadelphia", "state": "Pennsylvania", "country": "United States", "nct": "NCT05883449", "status": "TERMINATED", "site_status": "", "color": "#1abc9c", "title": "AFM13 + AB-101 (Terminated) [P2]"}, {"lat": 33.20984, "lon": -87.56917, "facility": "Artiva Investigational Site Tuscaloosa", "city": "Tuscaloosa", "state": "Alabama", "country": "United States", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 33.44838, "lon": -112.07404, "facility": "Artiva Investigational Site Phoenix", "city": "Phoenix", "state": "Arizona", "country": "United States", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 34.09001, "lon": -117.89034, "facility": "Artiva Investigational Site Covina", "city": "Covina", "state": "California", "country": "United States", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 33.80307, "lon": -118.07256, "facility": "Artiva Investigational Site Los Alamitos", "city": "Los Alamitos", "state": "California", "country": "United States", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 25.95648, "lon": -80.13921, "facility": "Artiva Investigational Site Aventura", "city": "Aventura", "state": "Florida", "country": "United States", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 26.93422, "lon": -80.09421, "facility": "Artiva Investigational Site Jupiter", "city": "Jupiter", "state": "Florida", "country": "United States", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 26.13421, "lon": -80.23184, "facility": "Artiva Investigational Site Plantation", "city": "Plantation", "state": "Florida", "country": "United States", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 41.76975, "lon": -87.93589, "facility": "Artiva Investigational Site Willowbrook", "city": "Willowbrook", "state": "Illinois", "country": "United States", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 41.66113, "lon": -91.53017, "facility": "Artiva Investigational Site Iowa", "city": "Iowa City", "state": "Iowa", "country": "United States", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 35.22709, "lon": -80.84313, "facility": "Artiva Investigational Site Charlotte", "city": "Charlotte", "state": "North Carolina", "country": "United States", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 35.22709, "lon": -80.84313, "facility": "Artiva Investigational Site Charlotte", "city": "Charlotte", "state": "North Carolina", "country": "United States", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 35.14063, "lon": -85.23273, "facility": "Artiva Investigational Site Hixson", "city": "Hixson", "state": "Tennessee", "country": "United States", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 32.73569, "lon": -97.10807, "facility": "Artiva Investigational Site Arlington", "city": "Arlington", "state": "Texas", "country": "United States", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 29.78579, "lon": -95.8244, "facility": "Artiva Investigational Site Katy", "city": "Katy", "state": "Texas", "country": "United States", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 32.7668, "lon": -96.59916, "facility": "Artiva Investigational Site Mesquite", "city": "Mesquite", "state": "Texas", "country": "United States", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 31.13129, "lon": -97.48946, "facility": "Artiva Investigational Site Woodland", "city": "Woodland", "state": "Texas", "country": "United States", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 42.69751, "lon": 23.32415, "facility": "Artiva Investigational Site Sofia", "city": "Sofia", "state": "", "country": "Bulgaria", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 43.29695, "lon": 5.38107, "facility": "Artiva Investigational Site Marseille", "city": "Marseille", "state": "", "country": "France", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 43.61093, "lon": 3.87635, "facility": "Artiva Investigational Site Montpellier", "city": "Montpellier", "state": "", "country": "France", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 43.60426, "lon": 1.44367, "facility": "Artiva Investigational Site Toulouse", "city": "Toulouse", "state": "", "country": "France", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 51.60698, "lon": 13.31243, "facility": "Artiva Investigational Site Munchen", "city": "München", "state": "", "country": "Germany", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 45.53558, "lon": 10.21472, "facility": "Artiva Investigational Site Brescia", "city": "Brescia", "state": "", "country": "Italy", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 41.12401, "lon": -8.61241, "facility": "Artiva Investigational Site Vila Nova De Gaia", "city": "Vila Nova de Gaia", "state": "", "country": "Portugal", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 44.43225, "lon": 26.10626, "facility": "Artiva Investigational Site Bucuresti", "city": "Bucharest", "state": "", "country": "Romania", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 44.43225, "lon": 26.10626, "facility": "Artiva Investigational Site Bucharest", "city": "Bucharest", "state": "", "country": "Romania", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}, {"lat": 37.38283, "lon": -5.97317, "facility": "Artiva Investigational Site Sevila", "city": "Seville", "state": "", "country": "Spain", "nct": "NCT06991114", "status": "RECRUITING", "site_status": "RECRUITING", "color": "#e67e22", "title": "AlloNK Autoimmune [P2]"}])};
+
+// Simple equirectangular projection
+var svg = document.getElementById('svg');
+
+// Draw world outline (simplified)
+fetch('https://cdn.jsdelivr.net/npm/world-atlas@2/land-110m.json')
+.then(r => r.json())
+.then(topo => {
+  // Use topojson
+  var script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/topojson-client@3';
+  script.onload = function() {
+    var land = topojson.feature(topo, topo.objects.land);
+    land.features.forEach(function(f) {
+      var coords = f.geometry.type === 'MultiPolygon' ? f.geometry.coordinates : [f.geometry.coordinates];
+      coords.forEach(function(poly) {
+        poly.forEach(function(ring) {
+          var path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+          var d = 'M' + ring.map(function(p) { return p[0] + ',' + (-p[1]); }).join('L') + 'Z';
+          path.setAttribute('d', d);
+          path.setAttribute('class', 'land');
+          svg.appendChild(path);
+        });
+      });
+    });
+    drawSites();
+  };
+  document.head.appendChild(script);
+})
+.catch(function() { drawSites(); });
+
+function drawSites() {
+  var tooltip = document.getElementById('tooltip');
+  sites.forEach(function(s) {
+    var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+    circle.setAttribute('cx', s.lon);
+    circle.setAttribute('cy', -s.lat);
+    circle.setAttribute('r', 1.5);
+    circle.setAttribute('fill', s.color);
+    circle.setAttribute('stroke', '#fff');
+    circle.setAttribute('stroke-width', '0.3');
+    circle.setAttribute('class', 'site');
+    circle.addEventListener('mouseover', function(e) {
+      tooltip.innerHTML = '<b>' + s.facility + '</b><br>' + s.city + (s.state ? ', '+s.state : '') + ', ' + s.country +
+        '<br><br><b>' + s.title + '</b><br>NCT: ' + s.nct + '<br>Status: ' + s.status;
+      tooltip.style.display = 'block';
+    });
+    circle.addEventListener('mousemove', function(e) {
+      tooltip.style.left = (e.clientX + 15) + 'px';
+      tooltip.style.top = (e.clientY - 10) + 'px';
+    });
+    circle.addEventListener('mouseout', function() { tooltip.style.display = 'none'; });
+    svg.appendChild(circle);
+  });
+}
+</script>
+</body>
+</html>
+`;
+}
+</script>
+</body>
+</html>
