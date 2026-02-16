@@ -653,14 +653,20 @@ function updateStats() {
 // Refresh the map with current sites
 function refreshMap() {
   const svg = document.getElementById('svg');
-  if (!svg) return;
+  if (!svg) {
+    console.error('SVG not found in refreshMap');
+    return;
+  }
   
   // Remove existing site circles
   const circles = svg.querySelectorAll('.site');
+  console.log('Removing', circles.length, 'existing circles');
   circles.forEach(c => c.remove());
   
-  // Redraw sites with updated filter
-  drawSites();
+  // Small delay to ensure DOM update, then redraw
+  setTimeout(function() {
+    drawSites();
+  }, 10);
 }
 
 // Refresh the table with current sites
@@ -701,6 +707,14 @@ function loadDashboard() {
 function drawSites() {
   var svg = document.getElementById('svg');
   var tooltip = document.getElementById('tooltip');
+  
+  if (!svg) {
+    console.error('SVG element not found');
+    return;
+  }
+  
+  console.log('Drawing', sites.length, 'sites on map');
+  
   sites.forEach(function(s) {
     var circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
     circle.setAttribute('cx', s.lon);
@@ -726,6 +740,8 @@ function drawSites() {
     circle.addEventListener('mouseout', function() { tooltip.style.display = 'none'; });
     svg.appendChild(circle);
   });
+  
+  console.log('Map redraw complete, total circles:', svg.querySelectorAll('.site').length);
 }
 
 // Table view functions
