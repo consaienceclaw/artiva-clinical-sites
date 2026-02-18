@@ -1048,13 +1048,13 @@ body.dashboard-mode #chatBubble { display: flex; }
   
   <!-- Chat Widget -->
   <button id="chatBubble" onclick="toggleChat()">
-    🦞
+    💊
     <span class="unread-dot" id="unreadDot"></span>
   </button>
   <div id="chatPanel">
     <div id="chatHeader">
       <div>
-        <div class="chat-title">🦞 Claw</div>
+        <div class="chat-title">💊 Claw</div>
         <div class="chat-status" id="chatStatus">Online</div>
       </div>
       <button id="chatClose" onclick="toggleChat()">×</button>
@@ -1696,7 +1696,7 @@ function renderInsights() {
   if (insights.length === 0) {
     body.innerHTML = '<div class="insights-empty">' +
       '<div class="empty-icon">💡</div>' +
-      '<p>No insights yet!<br>Ask Claw 🦞 questions about the clinical trial data in the chat,<br>and insights will be collected here over time.</p>' +
+      '<p>No insights yet!<br>Ask Claw 💊 questions about the clinical trial data in the chat,<br>and insights will be collected here over time.</p>' +
       '</div>';
     return;
   }
@@ -1717,7 +1717,7 @@ function renderInsights() {
     const date = new Date(ins.timestamp);
     const timeStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', hour: '2-digit', minute: '2-digit' });
     html += '<div class="insight-card">';
-    html += '<div class="insight-time">🦞 ' + timeStr + '</div>';
+    html += '<div class="insight-time">💊 ' + timeStr + '</div>';
     if (ins.category) html += '<span class="insight-category">' + ins.category + '</span>';
     html += '<div class="insight-text">' + ins.text.replace(/\n/g, '<br>') + '</div>';
     if (ins.tags && ins.tags.length > 0) {
