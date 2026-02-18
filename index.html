@@ -336,7 +336,15 @@ svg { width: 100%; height: 100%; }
   padding: 20px;
   font-size: 18px;
   font-weight: 600;
+  position: relative;
 }
+.table-close-btn {
+  position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+  background: rgba(255,255,255,0.15); border: none; color: white; font-size: 18px;
+  width: 32px; height: 32px; border-radius: 50%; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; transition: background 0.2s;
+}
+.table-close-btn:hover { background: rgba(255,255,255,0.3); }
 .search-box {
   padding: 15px 20px;
   background: #ecf0f1;
@@ -1098,7 +1106,7 @@ body.dashboard-mode #chatBubble { display: flex; }
 
   <div id="tableView">
     <div class="table-container">
-      <div class="table-header">Clinical Trial Sites - Data View</div>
+      <div class="table-header">Clinical Trial Sites - Data View<button class="table-close-btn" onclick="toggleView()" title="Back to Map View">✕</button></div>
       <div class="search-box">
         <input type="text" id="searchInput" placeholder="Search by facility, city, country, study, or NCT number..." onkeyup="filterTable()">
       </div>
